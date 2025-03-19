@@ -18,7 +18,7 @@ export function Banner () {
           target="_blank"
           className="block text-xs font-medium"
         >
-          Made by Crafted
+          Made by me
         </a>
         <button
           className="group focus-visible:border-ring focus-visible:ring-ring/50 flex size-7 items-center justify-center rounded transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:pointer-events-none"
