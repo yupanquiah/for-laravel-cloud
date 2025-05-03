@@ -1,22 +1,14 @@
-import AppLayout from '@/layouts/app-layout';
-import { BreadcrumbItem } from '@/types';
+import CompanyLayout from '@/layouts/admin/company/company-layout';
 import { Head } from '@inertiajs/react';
 import CompanyCreate from './create';
 
-const breadcrumbs: BreadcrumbItem[] = [
-  {
-    title: 'Empresa',
-    href: '/company',
-  },
-];
-
 export default function Company() {
   return (
-    <AppLayout breadcrumbs={breadcrumbs}>
+    <CompanyLayout title="Crear una nueva empresa" description="Agrega la información de tu empresa aquí.">
       <Head title="Empresa" />
       <section className="p-4">
         <CompanyCreate />
       </section>
-    </AppLayout>
+    </CompanyLayout>
   );
 }
