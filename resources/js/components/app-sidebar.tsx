@@ -4,7 +4,8 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid, Settings } from 'lucide-react';
+import { IconSettings, IconUserShield } from '@tabler/icons-react';
+import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
@@ -14,9 +15,14 @@ const mainNavItems: NavItem[] = [
     icon: LayoutGrid,
   },
   {
-    title: 'Configuraciones',
-    href: '/settings',
-    icon: Settings,
+    title: 'Configuración',
+    href: '/settings/company',
+    icon: IconSettings,
+  },
+  {
+    title: 'Roles',
+    href: '/role/',
+    icon: IconUserShield,
   },
 ];
 

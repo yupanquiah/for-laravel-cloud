@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\DB;
 
 Route::get('/', function () { return Inertia::render('welcome'); })->name('home');
@@ -36,6 +37,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
   Route::get('company/logo', [CompanyController::class, 'editLogo'])->name('logo.edit');
   Route::patch('company/logo/{id}', [CompanyController::class, 'updateLogo'])->name('logo.update');
+
+  Route::get('role', [RoleController::class, 'index'])->name('role.index');
+  Route::post('role', [RoleController::class, 'store'])->name('role.store');
+
 });
 
 require __DIR__.'/settings.php';
