@@ -1,4 +1,3 @@
-import { TablerIcon } from '@tabler/icons-react';
 import { LucideIcon } from 'lucide-react';
 import type { Config } from 'ziggy-js';
 
@@ -19,7 +18,7 @@ export interface NavGroup {
 export interface NavItem {
   title: string;
   href: string;
-  icon?: LucideIcon | TablerIcon | null;
+  icon?: LucideIcon | null;
   isActive?: boolean;
 }
 
