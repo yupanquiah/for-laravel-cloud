@@ -14,7 +14,11 @@ class RoleController extends Controller
    */
   public function index()
   {
-    return Inertia::render('admin/roles/index');
+
+
+    return Inertia::render('admin/roles/index', [
+      'roles' => DB::table('roles')->select('id', 'name')->get()
+    ]);
   }
 
   /**
