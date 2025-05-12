@@ -13,7 +13,7 @@ export const Toolbar = <TData,> ({ table }: ToolbarProps<TData>) => {
   return (
     <section className='flex items-center justify-between'>
       <Input
-        placeholder='Filtar por nombre...'
+        placeholder='Buscar por ...'
         value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
         onChange={(e) =>
           table.getColumn("name")?.setFilterValue(e.target.value)
