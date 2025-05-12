@@ -1,19 +1,15 @@
-import { ColumnDef } from "@tanstack/react-table"
-import { Checkbox } from '../ui/checkbox'
-import { ColumnHeader } from './column-header'
-import { RowActions } from './row-actions'
+import { ColumnDef } from '@tanstack/react-table';
+import { Checkbox } from '../ui/checkbox';
+import { ColumnHeader } from './column-header';
+import { RowActions } from './row-actions';
 
-
-export function StartColumns<T> (): ColumnDef<T>[] {
+export function StartColumns<T>(): ColumnDef<T>[] {
   return [
     {
-      id: "select",
+      id: 'select',
       header: ({ table }) => (
         <Checkbox
-          checked={
-            table.getIsAllPageRowsSelected() ||
-            (table.getIsSomePageRowsSelected() && "indeterminate")
-          }
+          checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && 'indeterminate')}
           onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
           aria-label="Select all"
           className="translate-y-[2px]"
@@ -31,21 +27,19 @@ export function StartColumns<T> (): ColumnDef<T>[] {
       enableHiding: false,
     },
     {
-      accessorKey: "id",
-      header: ({ column }) => (
-        <ColumnHeader column={column} title="Id" />
-      ),
-      cell: ({ row }) => <div className="w-[80px]">{row.getValue("id")}</div>,
+      accessorKey: 'id',
+      header: ({ column }) => <ColumnHeader column={column} title="Id" />,
+      cell: ({ row }) => <div className="w-[80px]">{row.getValue('id')}</div>,
       enableSorting: false,
       enableHiding: true,
     },
-  ]
+  ];
 }
-export function EndColumns<T> (): ColumnDef<T>[] {
+export function EndColumns<T>(): ColumnDef<T>[] {
   return [
     {
-      id: "actions",
+      id: 'actions',
       cell: ({ row }) => <RowActions />,
     },
-  ]
+  ];
 }

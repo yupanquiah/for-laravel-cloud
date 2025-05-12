@@ -1,30 +1,31 @@
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Table } from "@tanstack/react-table"
-import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'lucide-react'
-import { Button } from '../ui/button'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Table } from '@tanstack/react-table';
+import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'lucide-react';
+import { Button } from '../ui/button';
 
 interface PaginationProps<TData> {
-  table: Table<TData>
+  table: Table<TData>;
 }
 
-export const Pagination = <TData,> ({ table }: PaginationProps<TData>) => {
+export const Pagination = <TData,>({ table }: PaginationProps<TData>) => {
   return (
-    <section className='flex items-center justify-between px-2'>
-      <header className='flex-1 text-sm text-muted-foreground'>
-        {table.getFilteredSelectedRowModel().rows.length} de{" "}
-        {table.getFilteredRowModel().rows.length} fila(s) seleccionado.
+    <section className="flex items-center justify-between px-2">
+      <header className="text-muted-foreground flex-1 text-sm">
+        {table.getFilteredSelectedRowModel().rows.length} de {table.getFilteredRowModel().rows.length} fila(s) seleccionado.
       </header>
-      <main className='flex items-center space-x-8'>
-        <section className='flex items-center space-x-2'>
-          <p className='text-sm font-medium'>Filas por páginas</p>
-          <Select value={`${table.getState().pagination.pageSize}`}
+      <main className="flex items-center space-x-8">
+        <section className="flex items-center space-x-2">
+          <p className="text-sm font-medium">Filas por páginas</p>
+          <Select
+            value={`${table.getState().pagination.pageSize}`}
             onValueChange={(value) => {
-              table.setPageSize(Number(value))
-            }}>
+              table.setPageSize(Number(value));
+            }}
+          >
             <SelectTrigger>
               <SelectValue placeholder={table.getState().pagination.pageSize} />
             </SelectTrigger>
-            <SelectContent side='top'>
+            <SelectContent side="top">
               {[10, 20, 30, 40, 50].map((pageSize) => (
                 <SelectItem key={pageSize} value={`${pageSize}`}>
                   {pageSize}
@@ -33,11 +34,10 @@ export const Pagination = <TData,> ({ table }: PaginationProps<TData>) => {
             </SelectContent>
           </Select>
         </section>
-        <section className='flex items-center justify-center text-sm font-medium'>
-          Pagina {table.getState().pagination.pageIndex + 1} de{" "}
-          {table.getPageCount()}
+        <section className="flex items-center justify-center text-sm font-medium">
+          Pagina {table.getState().pagination.pageIndex + 1} de {table.getPageCount()}
         </section>
-        <section className='flex items-center space-x-2'>
+        <section className="flex items-center space-x-2">
           <Button
             variant="outline"
             className="hidden h-8 w-8 p-0 lg:flex"
@@ -47,21 +47,11 @@ export const Pagination = <TData,> ({ table }: PaginationProps<TData>) => {
             <span className="sr-only">Ir a la primera página</span>
             <ChevronsLeft />
           </Button>
-          <Button
-            variant="outline"
-            className="h-8 w-8 p-0"
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-          >
+          <Button variant="outline" className="h-8 w-8 p-0" onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
             <span className="sr-only">Ir a la página anterior</span>
             <ChevronLeft />
           </Button>
-          <Button
-            variant="outline"
-            className="h-8 w-8 p-0"
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-          >
+          <Button variant="outline" className="h-8 w-8 p-0" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
             <span className="sr-only">Ir a la página siguiente</span>
             <ChevronRight />
           </Button>
@@ -77,5 +67,5 @@ export const Pagination = <TData,> ({ table }: PaginationProps<TData>) => {
         </section>
       </main>
     </section>
-  )
-}
+  );
+};
