@@ -1,3 +1,4 @@
+import { Edit, Eye } from '@/components/icons/role-icons';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -24,8 +25,14 @@ export const RowActions = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[160px]">
-        <DropdownMenuItem>Editar</DropdownMenuItem>
-        <DropdownMenuItem>Ver</DropdownMenuItem>
+        <DropdownMenuItem className="flex items-center justify-between">
+          Editar
+          <Edit />
+        </DropdownMenuItem>
+        <DropdownMenuItem className="flex items-center justify-between">
+          Ver
+          <Eye />
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem className="text-red-400/80 hover:bg-red-400/10">
           Eliminar
