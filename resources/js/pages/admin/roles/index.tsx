@@ -1,19 +1,26 @@
+import { DataTable } from '@/components/table/table'
 import { CardDescription, CardTitle } from '@/components/ui/card'
 import AppLayout from '@/layouts/app-layout'
 import { BreadcrumbItem } from '@/types'
 import { Head, usePage } from '@inertiajs/react'
 import { CreateRole } from './create'
-import { Tabla } from './tabla'
+import { RoleColumns } from './role-columns'
 
 const breadcrumbs: BreadcrumbItem[] = [
   {
     title: 'Roles',
     href: '/role',
   },
-];
+]
 
-export default function Role() {
-  const { roles } = usePage().props;
+export interface Role {
+  id: string
+  name: string
+  description?: string
+}
+
+export default function Role () {
+  const { roles } = usePage<{ roles: Role[] }>().props
 
   return (
     <AppLayout breadcrumbs={breadcrumbs}>
@@ -26,11 +33,10 @@ export default function Role() {
           </section>
           <CreateRole />
         </header>
-        <main>
-          <Tabla data={roles} />
+        <main className='py-8'>
+          <DataTable data={roles} columns={RoleColumns} />
         </main>
-        <footer></footer>
       </section>
     </AppLayout>
-  );
+  )
 }
