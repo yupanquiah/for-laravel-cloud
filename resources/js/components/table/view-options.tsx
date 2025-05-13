@@ -17,7 +17,7 @@ interface ViewOptionsProps<TData> {
 export const ViewOptions = <TData,>({ table }: ViewOptionsProps<TData>) => {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
+      <DropdownMenuTrigger asChild>
         <Button variant="outline" size="sm" className="ml-auto h-8">
           <Settings2 />
           Ver columnas
