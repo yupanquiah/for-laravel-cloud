@@ -14,8 +14,6 @@ class RoleController extends Controller
    */
   public function index()
   {
-
-
     return Inertia::render('admin/roles/index', [
       'roles' => DB::table('roles')->select('id', 'name')->get()
     ]);
@@ -52,7 +50,9 @@ class RoleController extends Controller
    */
   public function show(string $id)
   {
-      //
+    return Inertia::render('admin/roles/show', [
+      'role' => DB::table('roles')->where('id', $id)->first()
+    ]);
   }
 
   /**
@@ -60,7 +60,7 @@ class RoleController extends Controller
    */
   public function edit(string $id)
   {
-      //
+
   }
 
   /**
@@ -76,6 +76,7 @@ class RoleController extends Controller
    */
   public function destroy(string $id)
   {
-      //
+    DB::table('roles')->where('id', $id)->delete();
+    return to_route('role.index')->with('success', 'Rol eliminado correctamente');
   }
 }
