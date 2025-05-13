@@ -40,6 +40,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
   Route::get('role', [RoleController::class, 'index'])->name('role.index');
   Route::post('role', [RoleController::class, 'store'])->name('role.store');
+  Route::get('role/{id}', [RoleController::class, 'show'])->name('role.show');
+  Route::delete('role/{id}', [RoleController::class, 'destroy'])->name('role.destroy');
 
 });
 
