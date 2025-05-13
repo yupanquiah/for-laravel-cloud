@@ -7,12 +7,20 @@ interface Role {
   name: string;
 }
 
-export const RoleColumns: ColumnDef<Role>[] = [
-  ...StartColumns<Role>(),
-  {
-    accessorKey: 'name',
-    header: ({ column }) => <ColumnHeader column={column} title="Rol" />,
-    cell: ({ row }) => <span className="capitalize">{row.getValue('name')}</span>,
-  },
-  ...EndColumns<Role>(),
-];
+interface RoleColumnsOptions {
+  onEdit: (role: Role) => void;
+  onDelete: (role: Role) => void;
+  onShow: (role: Role) => void;
+}
+
+export function RoleColumns({ onEdit, onDelete, onShow }: RoleColumnsOptions): ColumnDef<Role>[] {
+  return [
+    ...StartColumns<Role>(),
+    {
+      accessorKey: 'name',
+      header: ({ column }) => <ColumnHeader column={column} title="Rol" />,
+      cell: ({ row }) => <span className="capitalize">{row.getValue('name')}</span>,
+    },
+    ...EndColumns<Role>({ onEdit, onShow, onDelete }),
+  ];
+}
