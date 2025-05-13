@@ -3,6 +3,12 @@ import { Checkbox } from '../ui/checkbox';
 import { ColumnHeader } from './column-header';
 import { RowActions } from './row-actions';
 
+interface EndColumnsProps<T> {
+  onEdit: (row: T) => void;
+  onDelete: (row: T) => void;
+  onShow: (row: T) => void;
+}
+
 export function StartColumns<T>(): ColumnDef<T>[] {
   return [
     {
@@ -35,11 +41,12 @@ export function StartColumns<T>(): ColumnDef<T>[] {
     },
   ];
 }
-export function EndColumns<T>(): ColumnDef<T>[] {
+
+export function EndColumns<T>({ onEdit, onDelete, onShow }: EndColumnsProps<T>): ColumnDef<T>[] {
   return [
     {
       id: 'actions',
-      cell: ({ row }) => <RowActions />,
+      cell: ({ row }) => <RowActions row={row} onEdit={onEdit} onDelete={onDelete} onShow={onShow} />,
     },
   ];
 }
