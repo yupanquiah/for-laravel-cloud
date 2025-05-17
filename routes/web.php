@@ -42,6 +42,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
   Route::post('role', [RoleController::class, 'store'])->name('role.store');
   Route::get('role/{id}', [RoleController::class, 'show'])->name('role.show');
   Route::delete('role/{id}', [RoleController::class, 'destroy'])->name('role.destroy');
+  Route::patch('role/{id}', [RoleController::class, 'update'])->name('role.update');
 
 });
 
