@@ -33,9 +33,9 @@ export function StartColumns<T>(): ColumnDef<T>[] {
       enableHiding: false,
     },
     {
-      accessorKey: 'id',
-      header: ({ column }) => <ColumnHeader column={column} title="Id" />,
-      cell: ({ row }) => <div className="w-[80px]">{row.getValue('id')}</div>,
+      accessorKey: '#',
+      header: ({ column }) => <ColumnHeader column={column} title="#" />,
+      cell: ({ row }) => <div className="w-[80px]">{row.index + 1}</div>,
       enableSorting: false,
       enableHiding: true,
     },
