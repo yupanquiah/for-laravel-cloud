@@ -68,7 +68,15 @@ class RoleController extends Controller
    */
   public function update(Request $request, string $id)
   {
-      //
+    $request->validate([
+      'name' => 'required|unique:roles,name,' . $id,
+    ]);
+
+    DB::table('roles')->where('id', $id)->update([
+      'name' => $request->name,
+    ]);
+
+    return back()->with('success', 'Rol actualizado correctamente');
   }
 
   /**
