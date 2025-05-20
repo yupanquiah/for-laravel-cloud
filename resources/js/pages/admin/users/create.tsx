@@ -18,7 +18,7 @@ export const CreateUser = () => {
 
   const submit: FormEventHandler = (e) => {
     e.preventDefault();
-    post(route('role.store'));
+    post(route('user.store'));
   };
 
   return (

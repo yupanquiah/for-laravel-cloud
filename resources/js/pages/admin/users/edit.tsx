@@ -38,7 +38,7 @@ export const EditUser = ({ open, onOpenChange, user }: EditUserProps) => {
 
   const submit: FormEventHandler = (e) => {
     e.preventDefault();
-    patch(route('role.update', user.id), {
+    patch(route('user.update', user.id), {
       onSuccess: () => {
         onOpenChange(false);
         toast.success('Rol actualizado correctamente');
