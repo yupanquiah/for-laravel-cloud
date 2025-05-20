@@ -1,3 +1,4 @@
+import { Users } from '@/components/icons/icons';
 import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
@@ -20,8 +21,13 @@ const mainNavItems: NavItem[] = [
   },
   {
     title: 'Roles',
-    href: '/role/',
+    href: '/role',
     icon: ShieldUser,
+  },
+  {
+    title: 'Usuarios',
+    href: '/user',
+    icon: Users,
   },
 ];
 

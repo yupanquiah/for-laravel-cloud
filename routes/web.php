@@ -5,6 +5,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\DB;
 
 Route::get('/', function () { return Inertia::render('welcome'); })->name('home');
@@ -43,6 +44,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
   Route::get('role/{id}', [RoleController::class, 'show'])->name('role.show');
   Route::delete('role/{id}', [RoleController::class, 'destroy'])->name('role.destroy');
   Route::patch('role/{id}', [RoleController::class, 'update'])->name('role.update');
+
+  Route::get('user', [userController::class, 'index'])->name('user.index');
+  Route::post('user', [UserController::class, 'store'])->name('user.store');
+  Route::get('user/{id}', [UserController::class, 'show'])->name('user.show');
+  Route::delete('user/{id}', [userController::class, 'destroy'])->name('user.destroy');
+  Route::patch('user/{id}', [UserController::class, 'update'])->name('user.update');
 
 });
 
