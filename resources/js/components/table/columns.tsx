@@ -1,15 +1,15 @@
-import { ColumnDef } from '@tanstack/react-table';
-import { Checkbox } from '../ui/checkbox';
-import { ColumnHeader } from './column-header';
-import { RowActions } from './row-actions';
+import { ColumnDef } from '@tanstack/react-table'
+import { Checkbox } from '../ui/checkbox'
+import { ColumnHeader } from './column-header'
+import { RowActions } from './row-actions'
 
 interface EndColumnsProps<T> {
-  onEdit: (row: T) => void;
-  onDelete: (row: T) => void;
-  onShow: (row: T) => void;
+  onEdit: (row: T) => void
+  onDelete: (row: T) => void
+  onShow: (row: T) => void
 }
 
-export function StartColumns<T>(): ColumnDef<T>[] {
+export function StartColumns<T> (): ColumnDef<T>[] {
   return [
     {
       id: 'select',
@@ -33,20 +33,20 @@ export function StartColumns<T>(): ColumnDef<T>[] {
       enableHiding: false,
     },
     {
-      accessorKey: '#',
-      header: ({ column }) => <ColumnHeader column={column} title="#" />,
+      accessorKey: 'nro',
+      header: ({ column }) => <ColumnHeader column={column} title="Nro" />,
       cell: ({ row }) => <div className="w-[80px]">{row.index + 1}</div>,
       enableSorting: false,
       enableHiding: true,
     },
-  ];
+  ]
 }
 
-export function EndColumns<T>({ onEdit, onDelete, onShow }: EndColumnsProps<T>): ColumnDef<T>[] {
+export function EndColumns<T> ({ onEdit, onDelete, onShow }: EndColumnsProps<T>): ColumnDef<T>[] {
   return [
     {
       id: 'actions',
       cell: ({ row }) => <RowActions row={row} onEdit={onEdit} onDelete={onDelete} onShow={onShow} />,
     },
-  ];
+  ]
 }

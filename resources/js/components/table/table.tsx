@@ -24,7 +24,7 @@ interface DataTableProps<TData, TValue> {
 
 export const DataTable = <TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) => {
   const [rowSelection, setRowSelection] = useState({});
-  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({ id: false });
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({ nro: false });
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [sorting, setSorting] = useState<SortingState>([]);
 
