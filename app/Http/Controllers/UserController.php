@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -13,10 +15,12 @@ class UserController extends Controller
    */
   public function index()
   {
-    $users = User::all();
+    $company = Auth::user()->company_id;
+    $users = User::where('company_id', $company)->get();
 
     return Inertia::render('admin/users/index', [
-      'users' => $users
+      'users' => $users,
+      'roles' => DB::table('roles')->get()
     ]);
   }
 
