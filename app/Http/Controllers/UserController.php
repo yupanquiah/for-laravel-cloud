@@ -7,6 +7,8 @@ use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -37,7 +39,24 @@ class UserController extends Controller
    */
   public function store(Request $request)
   {
-    //
+    $request->validate([
+      'name'=>'required',
+      'email'=>'required|unique:users',
+      'password'=>'required|confirmed',
+    ]);
+
+    $user = User::create([
+      'name'=>$request->name,
+      'email'=>$request->email,
+      'password'=>Hash::make($request->password),
+      'company_id'=>Auth::user()->company_id,
+    ]);
+
+    $user->assignRole($request->role);
+
+
+
+    return back()->with('success', 'Se registro correctamente');
   }
 
   /**
