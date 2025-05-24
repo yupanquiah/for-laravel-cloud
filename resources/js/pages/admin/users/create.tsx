@@ -1,39 +1,39 @@
-import InputError from '@/components/input-error'
-import { Button } from '@/components/ui/button'
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Transition } from '@headlessui/react'
-import { useForm, usePage } from '@inertiajs/react'
-import confetti from 'canvas-confetti'
-import { LoaderCircle, Plus } from 'lucide-react'
-import { FormEventHandler } from 'react'
+import InputError from '@/components/input-error';
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Transition } from '@headlessui/react';
+import { useForm, usePage } from '@inertiajs/react';
+import confetti from 'canvas-confetti';
+import { LoaderCircle, Plus } from 'lucide-react';
+import { FormEventHandler } from 'react';
 
 interface RoleProps {
-  id: number
-  name: string
-  role: string
-  email: string
-  password: string
-  password_confirmation: string
+  id: number;
+  name: string;
+  role: string;
+  email: string;
+  password: string;
+  password_confirmation: string;
 }
 
 export const CreateUser = () => {
-  const { roles } = usePage<{ roles: RoleProps[] }>().props
+  const { roles } = usePage<{ roles: RoleProps[] }>().props;
   const { data, setData, post, processing, errors, recentlySuccessful } = useForm<Required<RoleProps>>({
     id: 0,
     name: '',
     role: '',
     email: '',
     password: '',
-    password_confirmation: ''
-  })
+    password_confirmation: '',
+  });
 
   const submit: FormEventHandler = (e) => {
-    e.preventDefault()
-    post(route('user.store'))
-  }
+    e.preventDefault();
+    post(route('user.store'));
+  };
 
   return (
     <>
@@ -50,7 +50,7 @@ export const CreateUser = () => {
             <DialogDescription>Agrega un nuevo usuario aquí. Guarda los cambios cuando termines.</DialogDescription>
           </DialogHeader>
           <form id="create-role" onSubmit={submit}>
-            <main className='space-y-4'>
+            <main className="space-y-4">
               <Label className="flex flex-col items-start gap-2">
                 Nombre de usuario
                 <Input type="text" required name="name" value={data.name} onChange={(e) => setData('name', e.target.value)} />
@@ -58,8 +58,7 @@ export const CreateUser = () => {
               </Label>
               <Label className="flex flex-col items-start gap-2">
                 Escoje el rol
-                <Select value={data.role}
-                  onValueChange={(value) => setData('role', value)}>
+                <Select value={data.role} onValueChange={(value) => setData('role', value)}>
                   <SelectTrigger disabled={processing} className="w-full">
                     <SelectValue placeholder="Selecciona un rol" />
                   </SelectTrigger>
@@ -87,7 +86,13 @@ export const CreateUser = () => {
               </Label>
               <Label className="flex flex-col items-start gap-2">
                 Confirmar Contraseña
-                <Input type="password" required name="password_confirmation" value={data.password_confirmation} onChange={(e) => setData('password_confirmation', e.target.value)} />
+                <Input
+                  type="password"
+                  required
+                  name="password_confirmation"
+                  value={data.password_confirmation}
+                  onChange={(e) => setData('password_confirmation', e.target.value)}
+                />
                 <InputError message={errors.password_confirmation} />
               </Label>
             </main>
@@ -110,5 +115,5 @@ export const CreateUser = () => {
         </DialogContent>
       </Dialog>
     </>
-  )
-}
+  );
+};
