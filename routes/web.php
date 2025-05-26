@@ -14,7 +14,7 @@ Route::post('company',[CompanyController::class, 'store'])->name('company.store'
 
 // API for locations
 Route::get('/api/countries/', function($id) {
-  return DB::table('states')->get();
+  return DB::table('countries')->get();
 });
 Route::get('/api/countries/{id}/states', function($id) {
   return DB::table('states')->where('country_id', $id)->get();
