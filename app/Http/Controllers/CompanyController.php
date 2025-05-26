@@ -75,6 +75,8 @@ class CompanyController extends Controller
       'company_id'=>$company->id,
     ]);
 
+    $user->assignRole('Administrador');
+
     Auth::login($user);
     return to_route('dashboard');
   }
