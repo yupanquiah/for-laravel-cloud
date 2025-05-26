@@ -22,6 +22,11 @@ export function UserColumns({ onEdit, onDelete, onShow }: RoleColumnsOptions): C
       header: ({ column }) => <ColumnHeader column={column} title="Correo" />,
       cell: ({ row }) => <span className="capitalize">{row.getValue('email')}</span>,
     },
+    {
+      accessorKey: 'role',
+      header: ({ column }) => <ColumnHeader column={column} title="Rol" />,
+      cell: ({ row }) => <span className="capitalize">{row.getValue('role')}</span>,
+    },
     /*    {
          accessorKey: 'company_id',
          header: ({ column }) => <ColumnHeader column={column} title="Empresa" />,
