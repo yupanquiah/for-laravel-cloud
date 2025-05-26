@@ -56,9 +56,8 @@ export default function CompanyCreate() {
     fetch('/api/countries')
       .then((res) => res.json())
       .then((response) => {
-        // Verifica si la propiedad 'data' contiene un array
         if (Array.isArray(response.data)) {
-          setCountries(response.data); // Usa 'response.data' para obtener el array de países
+          setCountries(response.data);
         } else {
           console.error("Error: La propiedad 'data' no es un array", response);
         }
@@ -68,35 +67,31 @@ export default function CompanyCreate() {
       });
   }, []);
 
-  // Manejo de cambio de país
   const handleCountryChange = async (id: number) => {
-    setSelectedCountry(id); // Establece el país seleccionado
-    setData('country', id.toString()); // Actualiza el dato en el formulario
+    setSelectedCountry(id);
+    setData('country', id.toString());
 
-    // Solicita los estados del país seleccionado
     const res = await fetch(`/api/countries/${id}/states`);
     const data = await res.json();
-    setStates(data); // Establece los estados para el país seleccionado
-    setCities([]); // Resetea las ciudades
-    setData('department', ''); // Resetea el estado
-    setData('city', ''); // Resetea la ciudad
+    setStates(data);
+    setCities([]);
+    setData('department', '');
+    setData('city', '');
 
     const currencyRes = await fetch(`/api/countries/${id}/currencies`);
     const currencyData = await currencyRes.json();
-    setCurrencies(currencyData); // Establece las monedas para el país seleccionado
+    setCurrencies(currencyData);
     setData('currency', '');
   };
 
-  // Manejo de cambio de estado
   const handleStateChange = async (id: number) => {
-    setSelectedState(id); // Establece el estado seleccionado
-    setData('department', id.toString()); // Actualiza el dato de estado en el formulario
+    setSelectedState(id);
+    setData('department', id.toString());
 
-    // Solicita las ciudades del estado seleccionado
     const res = await fetch(`/api/states/${id}/cities`);
     const data = await res.json();
-    setCities(data); // Establece las ciudades para el estado seleccionado
-    setData('city', ''); // Resetea la ciudad
+    setCities(data);
+    setData('city', '');
   };
 
   const submit: FormEventHandler = (e) => {
