@@ -22,9 +22,9 @@ export const DeleteUser = ({ open, onOpenChange, user, onConfirm }: DeleteRolePr
   return (
     <AlertDialog open={open} onOpenChange={onOpenChange}>
       <AlertDialogContent>
-        <AlertDialogTitle>¿Eliminar rol?</AlertDialogTitle>
+        <AlertDialogTitle>¿Eliminar usuario?</AlertDialogTitle>
         <AlertDialogDescription>
-          Esta acción no se puede deshacer. ¿Seguro que deseas eliminar el rol <b>{user.name}</b>?
+          Esta acción no se puede deshacer. ¿Seguro que deseas eliminar el este usuario <b>{user.name}</b>?
         </AlertDialogDescription>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancelar</AlertDialogCancel>
