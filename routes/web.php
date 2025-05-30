@@ -27,7 +27,7 @@ Route::get('/api/countries/{id}/currencies', function($id) {
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
-  Route::get('dashboard', function () { return Inertia::render('dashboard'); })->name('dashboard');
+  Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
   Route::get('admin', [AdminController::class, 'index'])->name('admin');
 
   Route::get('company/identity', [CompanyController::class, 'editIdentity'])->name('identity.edit');
