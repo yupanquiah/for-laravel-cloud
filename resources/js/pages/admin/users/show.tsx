@@ -28,7 +28,10 @@ export const ShowUser = ({ open, onOpenChange, user }: ShowUserProps) => {
               <b>Nombre:</b> {user?.name}
             </p>
             <p>
-              <b>Corrreo:</b> {user?.email || 'Sin descripción'}
+              <b>Corrreo:</b> {user?.email}
+            </p>
+            <p>
+              <b>Rol:</b> {user?.role}
             </p>
           </div>
         </AlertDialogDescription>
