@@ -18,11 +18,22 @@ class UserController extends Controller
   public function index()
   {
     $company = Auth::user()->company_id;
-    $users = User::where('company_id', $company)->get();
+    $users = User::with('roles')
+      ->where('company_id', $company)
+      ->get()
+      ->map(function ($user){
+        return [
+          'id' => $user->id,
+          'name' => $user->name,
+          'email' => $user->email,
+          'company_id' => $user->company_id,
+          'role' => $user->roles->pluck('name')->first()
+        ];
+      });
 
     return Inertia::render('admin/users/index', [
       'users' => $users,
-      'roles' => DB::table('roles')->get()
+      'roles' => DB::table('roles')->get(),
     ]);
   }
 
@@ -54,8 +65,6 @@ class UserController extends Controller
 
     $user->assignRole($request->role);
 
-
-
     return back()->with('success', 'Se registro correctamente');
   }
 
@@ -80,7 +89,26 @@ class UserController extends Controller
    */
   public function update(Request $request, string $id)
   {
-    //
+    $request->validate([
+      'name' => 'required',
+      'email' => 'required|email|unique:users,email,' . $id,
+      'role' => 'required'
+    ]);
+
+    $user = User::findOrFail($id);
+    $user->name = $request->name;
+    $user->email = $request->email;
+
+    if ($request->filled('password')) {
+      $user->password = Hash::make($request->password);
+    }
+
+    $user->save();
+
+    // Remove all roles and assign the new one
+    $user->syncRoles([$request->role]);
+
+    return back()->with('success', 'Usuario actualizado correctamente');
   }
 
   /**
@@ -88,6 +116,9 @@ class UserController extends Controller
    */
   public function destroy(string $id)
   {
-    //
+    $user = User::findOrFail($id);
+    $user->delete();
+
+    return back()->with('success', 'Usuario eliminado correctamente');
   }
 }
