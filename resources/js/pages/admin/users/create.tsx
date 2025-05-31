@@ -109,7 +109,7 @@ export const CreateUser = () => {
             </Transition>
             <Button form="create-role" type="submit" disabled={processing}>
               {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
-              Crear rol
+              Crear usuario
             </Button>
           </DialogFooter>
         </DialogContent>
