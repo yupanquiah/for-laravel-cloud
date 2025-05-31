@@ -3,10 +3,10 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useForm } from '@inertiajs/react';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useForm, usePage } from '@inertiajs/react';
 import { FormEventHandler, useEffect } from 'react';
 import { toast } from 'sonner';
-import { UserProps } from './index';
 
 interface EditUserProps {
   open: boolean;
@@ -14,7 +14,17 @@ interface EditUserProps {
   user: UserProps | null;
 }
 
+interface UserProps {
+  id: number;
+  name: string;
+  role: string;
+  email: string;
+  password: string;
+  password_confirmation: string;
+}
+
 export const EditUser = ({ open, onOpenChange, user }: EditUserProps) => {
+  const { roles } = usePage<{ roles: UserProps[] }>().props;
   if (!user) return null;
 
   const { data, setData, patch, processing, errors } = useForm<Required<UserProps>>({
@@ -22,17 +32,18 @@ export const EditUser = ({ open, onOpenChange, user }: EditUserProps) => {
     name: user.name,
     email: user.email,
     password: user.password,
-    company_id: user.company_id,
+    password_confirmation: user.password_confirmation,
+    role: user.role,
   });
 
-  // Actualiza los datos cuando cambia el rol a editar
   useEffect(() => {
     setData({
       id: user.id,
       name: user.name,
       email: user.email,
       password: user.password,
-      company_id: user.company_id,
+      password_confirmation: user.password_confirmation,
+      role: user?.role,
     });
   }, [user]);
 
@@ -54,16 +65,51 @@ export const EditUser = ({ open, onOpenChange, user }: EditUserProps) => {
           <DialogDescription>Edita los datos del rol y guarda los cambios.</DialogDescription>
         </DialogHeader>
         <form id="edit-role" onSubmit={submit}>
-          <Label>
-            Nombre de rol
-            <Input type="text" required name="name" value={data.name} onChange={(e) => setData('name', e.target.value)} />
-            <InputError message={errors.name} />
-          </Label>
-          <Label>
-            Descripción
-            <Input type="text" name="description" value={data.email} onChange={(e) => setData('email', e.target.value)} />
-            <InputError message={errors.email} />
-          </Label>
+          <main className="space-y-4">
+            <Label className="flex flex-col items-start gap-2">
+              Nombre de usuario
+              <Input type="text" required name="name" value={data.name} onChange={(e) => setData('name', e.target.value)} />
+              <InputError message={errors.name} />
+            </Label>
+            <Label className="flex flex-col items-start gap-2">
+              Escoje el rol
+              <Select value={data.role} onValueChange={(value) => setData('role', value)}>
+                <SelectTrigger disabled={processing} className="w-full">
+                  <SelectValue placeholder="Selecciona un rol" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Roles</SelectLabel>
+                    {roles.map((role) => (
+                      <SelectItem key={role.id} value={role.name}>
+                        {role.name}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </Label>
+            <Label className="flex flex-col items-start gap-2">
+              Correo
+              <Input type="email" required name="email" value={data.email} onChange={(e) => setData('email', e.target.value)} />
+              <InputError message={errors.email} />
+            </Label>
+            <Label className="flex flex-col items-start gap-2">
+              Contraseña
+              <Input type="password" name="password" value={data.password} onChange={(e) => setData('password', e.target.value)} />
+              <InputError message={errors.password} />
+            </Label>
+            <Label className="flex flex-col items-start gap-2">
+              Confirmar Contraseña
+              <Input
+                type="password"
+                name="password_confirmation"
+                value={data.password_confirmation}
+                onChange={(e) => setData('password_confirmation', e.target.value)}
+              />
+              <InputError message={errors.password_confirmation} />
+            </Label>
+          </main>
         </form>
         <DialogFooter>
           <Button form="edit-role" type="submit" disabled={processing}>
