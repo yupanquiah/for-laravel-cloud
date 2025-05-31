@@ -10,7 +10,7 @@ import confetti from 'canvas-confetti';
 import { LoaderCircle, Plus } from 'lucide-react';
 import { FormEventHandler } from 'react';
 
-interface RoleProps {
+interface UserProps {
   id: number;
   name: string;
   role: string;
@@ -20,8 +20,8 @@ interface RoleProps {
 }
 
 export const CreateUser = () => {
-  const { roles } = usePage<{ roles: RoleProps[] }>().props;
-  const { data, setData, post, processing, errors, recentlySuccessful } = useForm<Required<RoleProps>>({
+  const { roles } = usePage<{ roles: UserProps[] }>().props;
+  const { data, setData, post, processing, errors, recentlySuccessful } = useForm<Required<UserProps>>({
     id: 0,
     name: '',
     role: '',
