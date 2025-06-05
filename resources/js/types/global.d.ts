@@ -8,7 +8,3 @@ declare module 'canvas-confetti' {
   const confetti: any
   export default confetti
 }
-
-declare module "react/jsx-runtime" {
-  export default any
-}
